@@ -7,11 +7,11 @@ interface UserData {
   password: string;
 }
 
-interface User {
-  name: string;
-  email: string;
-  token: string;
-}
+// interface User {
+//   name: string;
+//   email: string;
+//   token: string;
+// }
 interface InitialState {
   user: any;
   isSuccess: boolean;

@@ -8,6 +8,7 @@ import { GoProjectRoadmap } from "react-icons/go";
 import { FaMicroblog } from "react-icons/fa6";
 import { MdContactEmergency } from "react-icons/md";
 import { FaUsers } from "react-icons/fa";
+import { FaCoins } from "react-icons/fa";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -48,21 +49,21 @@ const Sidebar = () => {
               Users
             </li>
           </Link>
-          <Link href="/dashboard/projects">
+          <Link href="/dashboard/coins">
             <li className="text-slate-200 font-semibold text-sm flex items-center justify-around">
               <span className="mr-5">
-                <GoProjectRoadmap className="text-xl" />
+                <FaCoins className="text-xl" />
               </span>{" "}
-              Projects
+              Coins
             </li>
           </Link>
 
-          <Link href="/dashboard/blog">
+          <Link href="/dashboard/chart">
             <li className="text-slate-200 font-semibold text-sm  flex items-center justify-around">
               <span className="mr-5">
                 <FaMicroblog className="text-xl" />
               </span>{" "}
-              Blog
+               Chart
             </li>
           </Link>
           <Link href="/dashboard/contact">
@@ -94,15 +95,12 @@ const Sidebar = () => {
             </li>
           </Link>
 
-          <li
-            className="text-slate-200 font-semibold text-sm  flex items-center justify-around"
+          <button
+            className="w-[95%]  py-3 px-3 text-slate-200 font-semibold text-sm bg-red-800 flex items-center justify-center"
             onClick={logoutUser}
           >
-            <span className="mr-5">
-              <MdLogout className="text-xl" />
-            </span>{" "}
             Logout
-          </li>
+          </button>
         </ul>
       </div>
     </div>
