@@ -3,65 +3,23 @@ import React, { useState } from "react";
 import PieChart from "../components/PieChart";
 import LineChart from "../components/LineChart";
 import BarChart from "../components/BarChart";
-import { useAppDispatch } from "../Redux/hooks";
-import { createChartValue } from "../Redux/chart/chartSlice";
-
-interface SalesInfo {
-  sales: number | null;
-  purchase: number | null;
-  month: string;
-}
+import Form from "../components/Form";
+import { CopilotPopup } from "@copilotkit/react-ui";
 
 const Page = () => {
-
-  const dispatch = useAppDispatch();
-
-
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-
+  const name = "Add New Data";
+  const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const togglePopup = () => {
     setIsPopupOpen(!isPopupOpen);
   };
 
-  const [salesInfo, setSalesInfo] = useState<SalesInfo>({
-    sales: null,
-    purchase: null,
-    month: "",
-  });
-
-  const { sales, purchase, month } = salesInfo;
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setSalesInfo({
-      ...salesInfo,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    dispatch(createChartValue({
-      // id : crypto.randomUUID(),
-      sales : sales,
-      purchase : purchase,
-      month : month
-    }));
-    setSalesInfo({
-      sales : null,
-      purchase : null,
-      month : ""
-    })
-    console.log("set Values");
-  };
-
-  console.log(salesInfo, "Info");
   return (
     <div className="w-full h-[100%] flex items-center justify-center">
       <div className="w-[95%] h-[95%] flex items-center justify-between  flex-wrap  relative overflow-x-auto shadow-md sm:rounded-lg ">
         <div className="w-[100%] h-[25rem] flex items-center justify-center flex-col my-2 p-2 bg-slate-900 border-2 border-slate-800">
           <div className="w-[100%] h-[15%] flex items-center justify-end my-2 p-2">
             <button
-              className="px-5 py-2 bg-slate-400 text-black"
+              className="px-4 py-1 text-xs bg-slate-200 text-black mx-1 font-bold"
               onClick={togglePopup}
             >
               Add
@@ -85,79 +43,24 @@ const Page = () => {
         <div className="w-[65%] h-[20rem] flex items-center justify-center my-2 p-2 bg-slate-900 border-2 border-slate-800">
           <BarChart />
         </div>
+
+        <CopilotPopup
+        instructions={"You are assisting the user as best as you can. Ansewr in the best way possible given the data you have."}
+        labels={{
+          title: "Popup Assistant",
+          initial: "Need any help?",
+        }}
+      />
       </div>
 
       {isPopupOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-md w-[25rem] h-[25rem] shadow-lg">
-            <h2 className="text-xl font-semibold mb-4">Add New Data</h2>
-
-            <div>
-              <label className="block mb-2 text-gray-700">
-                Sales (Select 0 to 20)
-              </label>
-              <input
-                type="number"
-                className="w-full p-2 border border-gray-300 rounded-md"
-                placeholder="Enter Sales value"
-                name="sales"
-                value={sales ?? ""}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="mt-4">
-              <label className="block mb-2 text-gray-700">
-                Purchase (Select 0 to 20)
-              </label>
-              <input
-                type="number"
-                className="w-full p-2 border border-gray-300 rounded-md"
-                placeholder="Enter Purchase value"
-                name="purchase"
-                value={purchase ?? ""}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="mt-4">
-              <label className="block mb-2 text-gray-700">Select Month</label>
-              <select
-               
-                id=""
-                className="w-full p-2 border border-gray-300 rounded-md"
-                name="month"
-                value={month}
-                onChange={handleChange}
-              >
-                <option value="january">January</option>
-                <option value="february">February</option>
-                <option value="march">March</option>
-                <option value="april">April</option>
-                <option value="may">May</option>
-                <option value="june">June</option>
-                <option value="july">July</option>
-                <option value="august">August</option>
-                <option value="september">September</option>
-                <option value="october">October</option>
-                <option value="november">November</option>
-                <option value="december">December</option>
-              </select>
-            </div>
-            <div className="flex justify-end mt-6">
-              <button
-                className="px-4 py-2 bg-gray-400 text-white rounded mr-2"
-                onClick={togglePopup}
-              >
-                Cancel
-              </button>
-              <button
-                className="px-4 py-2 bg-blue-600 text-white rounded"
-                type="submit"
-                onClick={handleSubmit}
-              >
-                Add
-              </button>
-            </div>
-          </div>
+          <Form
+            name={name}
+            isPopupOpen={isPopupOpen}
+            setIsPopupOpen={setIsPopupOpen}
+            togglePopup={togglePopup}
+          />
         </div>
       )}
     </div>

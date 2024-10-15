@@ -4,7 +4,7 @@ import dataReducer from "./data/dataSlice";
 import coinReducer from "./coin/coinSlice";
 import chartReducer from "./chart/chartSlice";
 
-const reducer = combineReducers({
+const rootReducer = combineReducers({
   auth: authReducer,
   data: dataReducer,
   coin: coinReducer,
@@ -12,4 +12,4 @@ const reducer = combineReducers({
 });
 
 
-export default reducer;
+export default rootReducer;

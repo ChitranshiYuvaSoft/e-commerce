@@ -32,13 +32,15 @@ const page = () => {
     });
   };
 
+  const tokenGet = localStorage.getItem("token")
+
   const handleLoginUser = (e: any) => {
     e.preventDefault();
     console.log("userLogin");
     dispatch(login(userData));
-    if (localStorage.getItem("token")) {
-      // router.refresh();
-      window.location.reload();
+    if (token) {
+      router.refresh();
+      // window.location.reload();
     }
   };
 

@@ -39,10 +39,10 @@ const Sidebar = () => {
           <p className="text-slate-300 text-xs">{email}</p>
         </div>
       </div>
-      <div className="w-full h-[30%] shadow-inner flex items-center justify-between pl-5">
-        <ul className="w-full h-[100%] flex items-start justify-around flex-col">
+      <div className="w-full h-[50%] shadow-inner flex items-center justify-start pl-5">
+        <ul className="w-full h-[100%] flex items-start justify-satrt flex-col">
           <Link href="/dashboard/users">
-            <li className="text-slate-200 font-semibold text-sm flex items-center justify-around">
+            <li className="text-slate-200 font-semibold text-sm flex items-center justify-around my-4">
               <span className="mr-5">
                 <FaUsers className="text-xl" />
               </span>{" "}
@@ -50,50 +50,42 @@ const Sidebar = () => {
             </li>
           </Link>
           <Link href="/dashboard/coins">
-            <li className="text-slate-200 font-semibold text-sm flex items-center justify-around">
+            <li className="text-slate-200 font-semibold text-sm flex items-center justify-around my-4">
               <span className="mr-5">
                 <FaCoins className="text-xl" />
               </span>{" "}
               Coins
             </li>
           </Link>
-
-          <Link href="/dashboard/chart">
-            <li className="text-slate-200 font-semibold text-sm  flex items-center justify-around">
-              <span className="mr-5">
-                <FaMicroblog className="text-xl" />
-              </span>{" "}
-               Chart
-            </li>
-          </Link>
-          <Link href="/dashboard/contact">
-            <li className="text-slate-200 font-semibold text-sm  flex items-center justify-around">
-              <span className="mr-5">
-                <MdContactEmergency className="text-xl" />
-              </span>{" "}
-              Contact
-            </li>
-          </Link>
-        </ul>
-      </div>
-      <div className="w-full h-[30%] shadow-inner flex items-center justify-between pl-5">
-        <ul className="w-full h-[100%] flex items-start justify-around flex-col">
-          <Link href="/dashboard/setting">
-            <li className="text-slate-200 font-semibold text-sm  flex items-center justify-around">
-              <span className="mr-5">
-                <IoSettingsOutline className="text-xl" />
-              </span>{" "}
-              Setting
-            </li>
-          </Link>
           <Link href="/dashboard/profile">
-            <li className="text-slate-200 font-semibold text-sm flex items-center justify-around">
+            <li className="text-slate-200 font-semibold text-sm flex items-center justify-around my-4">
               <span className="mr-5">
                 <FaRegUser className="text-xl" />
               </span>{" "}
               Profile
             </li>
           </Link>
+
+          {/* <Link href="/dashboard/contact">
+            <li className="text-slate-200 font-semibold text-sm  flex items-center justify-around">
+              <span className="mr-5">
+                <MdContactEmergency className="text-xl" />
+              </span>{" "}
+              Contact
+            </li>
+          </Link> */}
+        </ul>
+      </div>
+      <div className="w-full h-[10%] shadow-inner flex items-center justify-between pl-5">
+        <ul className="w-full h-[100%] flex items-start justify-around flex-col">
+          {/* <Link href="/dashboard/setting">
+            <li className="text-slate-200 font-semibold text-sm  flex items-center justify-around">
+              <span className="mr-5">
+                <IoSettingsOutline className="text-xl" />
+              </span>{" "}
+              Setting
+            </li>
+          </Link> */}
 
           <button
             className="w-[95%]  py-3 px-3 text-slate-200 font-semibold text-sm bg-red-800 flex items-center justify-center"

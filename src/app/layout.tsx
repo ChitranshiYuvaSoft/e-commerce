@@ -3,6 +3,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import ReduxProvider from "./redux-provider";
 import LayoutWrapper from "@/privateRoutes/LayoutWrapper";
+import toast, { Toaster } from "react-hot-toast";
+import { CopilotKit } from "@copilotkit/react-core"; 
+import "@copilotkit/react-ui/styles.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,8 +34,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReduxProvider>
-          <LayoutWrapper>{children}</LayoutWrapper>
+          <LayoutWrapper>
+          <CopilotKit runtimeUrl="/api/copilotkit">
+            {children}
+            </CopilotKit> 
+            </LayoutWrapper>
         </ReduxProvider>
+        <Toaster position="top-right" reverseOrder={false} />
       </body>
     </html>
   );

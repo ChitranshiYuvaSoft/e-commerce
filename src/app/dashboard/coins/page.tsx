@@ -11,7 +11,7 @@ const page = () => {
   const { coins, isLoading, isError, isSuccess } = useAppSelector(
     (state: RootState) => state.coin
   );
-
+console.log(coins, "coin data")
   if(!coins){
     return (
       <>

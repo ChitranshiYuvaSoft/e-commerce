@@ -1,64 +1,43 @@
-
 "use client";
 import React, { useRef, useEffect } from "react";
-import Chart from "chart.js/auto";
+import Chart, { BubbleDataPoint, Point } from "chart.js/auto";
 import { useAppSelector } from "../Redux/hooks";
 import { RootState } from "../Redux/store";
 
 const LineChart: React.FC = () => {
-
-  const {lineChartData} = useAppSelector((state:RootState) => state.chart);
-  console.log(lineChartData, "Linechart")
-
-  const month = lineChartData.map(item => item.month );
-  const sales = lineChartData.map(item => item.sales );
-  const purchase = lineChartData.map(item => item.purchase );
-  console.log(month, sales, purchase);
+  const { lineChartData } = useAppSelector((state: RootState) => state.chart);
 
   const chartRef = useRef<HTMLCanvasElement | null>(null);
-  const chartInstanceRef = useRef<Chart | null>(null); 
+  const chartInstanceRef = useRef<Chart | null>(null);
 
   useEffect(() => {
     const ctx = chartRef.current?.getContext("2d");
 
-  
     if (chartInstanceRef.current) {
       chartInstanceRef.current.destroy();
     }
 
     if (ctx) {
-      
       chartInstanceRef.current = new Chart(ctx, {
         type: "line",
         data: {
-          // labels: [
-          //   "January",
-          //   "February",
-          //   "March",
-          //   "April",
-          //   "May",
-          //   "June",
-          //   "July",
-          // ], 
-          labels : lineChartData.map(item => item.month ),
+          labels: lineChartData.map((item: any) => item.month),
           datasets: [
             {
               label: "Sales",
-              // data: [12, 19, 3, 5, 2, 3, 7],
-              data: lineChartData.map(item => item.sales ),
+              data: lineChartData.map((item: any) => item.sales),
               borderColor: "#FFC0CB",
               backgroundColor: "rgb(170, 51, 106)",
               fill: false,
-              pointStyle: 'circle'
+              pointStyle: "circle",
             },
             {
               label: "Purchase",
-              // data: [3, 5, 7, 1, 2, 13, 6],
-              data: lineChartData.map(item => item.purchase ),
+              data: lineChartData.map((item: any) => item.purchase),
               borderColor: "#FFFF00",
               backgroundColor: "#008000",
               fill: false,
-              pointStyle: 'circle'
+              pointStyle: "circle",
             },
           ],
         },
@@ -76,14 +55,12 @@ const LineChart: React.FC = () => {
           scales: {
             y: {
               beginAtZero: true,
-             
             },
           },
         },
-      });
+      } as any);
     }
 
-    
     return () => {
       if (chartInstanceRef.current) {
         chartInstanceRef.current.destroy();

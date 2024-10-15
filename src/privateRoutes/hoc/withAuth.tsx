@@ -22,6 +22,7 @@ const withAuth = (WrappedComponent: React.ComponentType) => {
       } else {
         if (publicRoutes.includes(pathName)) {
           router.push("/dashboard");
+        
         } else {
           router.push(pathName);
         }
