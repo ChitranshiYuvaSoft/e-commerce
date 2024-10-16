@@ -2,15 +2,16 @@
 import { getCoinData } from "@/app/Redux/coin/coinSlice";
 import { useAppDispatch, useAppSelector } from "@/app/Redux/hooks";
 import { RootState } from "@/app/Redux/store";
-import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect } from "react";
 
 const Page = () => {
   const dispatch = useAppDispatch();
-  const { coins = [], isLoading, isError } = useAppSelector(
-    (state: RootState) => state.coin
-  );
+  const {
+    coins = [],
+    isLoading,
+    isError,
+  } = useAppSelector((state: RootState) => state.coin);
 
   useEffect(() => {
     dispatch(getCoinData());
@@ -19,10 +20,10 @@ const Page = () => {
   if (isLoading) {
     return (
       <div className="flex-col gap-4 w-full flex items-center justify-center">
-      <div className="w-20 h-20 border-4 border-transparent text-blue-400 text-4xl animate-spin flex items-center justify-center border-t-blue-400 rounded-full">
-        <div className="w-16 h-16 border-4 border-transparent text-red-400 text-2xl animate-spin flex items-center justify-center border-t-red-400 rounded-full"></div>
+        <div className="w-20 h-20 border-4 border-transparent text-blue-400 text-4xl animate-spin flex items-center justify-center border-t-blue-400 rounded-full">
+          <div className="w-16 h-16 border-4 border-transparent text-red-400 text-2xl animate-spin flex items-center justify-center border-t-red-400 rounded-full"></div>
+        </div>
       </div>
-    </div>
     );
   }
 
@@ -41,12 +42,11 @@ const Page = () => {
               className="w-[20%] mx-6 my-2 max-h-[60%] bg-white p-2 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
               key={index}
             >
-              <Link href="#" className="max-h-[50%] w-full flex items-center justify-center mt-4">
-                <img
-                  src={item?.image}
-                  alt="coin"
-                  className="w-[50%] h-[40%]"
-                />
+              <Link
+                href="#"
+                className="max-h-[50%] w-full flex items-center justify-center mt-4"
+              >
+                <img src={item?.image} alt="coin" className="w-[50%] h-[40%]" />
               </Link>
               <div className="p-5 w-full max-h-[50%] flex items-center justify-around flex-col">
                 <Link href="#">
@@ -54,7 +54,7 @@ const Page = () => {
                     {item.id}
                   </h5>
                 </Link>
-                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 text-xl" >
+                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 text-xl">
                   {item.symbol}
                 </p>
                 <Link

@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-
 import { useSelector } from "react-redux";
 
 interface UserData {
@@ -20,7 +19,7 @@ const page = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const { user, isSuccess, isLoading, registerUser, message, isError } =
+  const { isSuccess, isLoading, registerUser, message, isError } =
     useSelector((state: RootState) => state.auth);
 
   const [userData, setUserData] = useState<UserData>({

@@ -4,13 +4,12 @@ import { useAppDispatch, useAppSelector } from "@/app/Redux/hooks";
 import { AppDispatch, RootState } from "@/app/Redux/store";
 import { useParams } from "next/navigation";
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
 
 const page = () => {
   const dispatch = useAppDispatch();
   const { coinId } = useParams();
 
-  const { coin, isLoading, isSuccess, isError } = useAppSelector(
+  const { coin, isLoading } = useAppSelector(
     (state: RootState) => state.coin
   );
 

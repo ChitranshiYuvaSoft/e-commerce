@@ -20,12 +20,7 @@ interface FormProps {
   name: string;
 }
 
-const Form = ({
-  isPopupOpen,
-  setIsPopupOpen,
-  togglePopup,
-  name,
-}: FormProps) => {
+const Form = ({ togglePopup, name }: FormProps) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -86,7 +81,6 @@ const Form = ({
 
     toast.success("Successfully Save Data In Chart.");
     togglePopup();
-    
   };
 
   return (

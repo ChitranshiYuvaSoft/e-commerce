@@ -1,6 +1,6 @@
-"use client"
-import React from 'react';
-import { Bar } from 'react-chartjs-2';
+"use client";
+import React from "react";
+import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,11 +9,10 @@ import {
   Title,
   Tooltip,
   Legend,
-  ChartOptions
-} from 'chart.js';
-import { useAppSelector } from '../Redux/hooks';
-import { RootState } from '../Redux/store';
-
+  ChartOptions,
+} from "chart.js";
+import { useAppSelector } from "../Redux/hooks";
+import { RootState } from "../Redux/store";
 
 ChartJS.register(
   CategoryScale,
@@ -23,7 +22,6 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
 
 interface ChartDataItem {
   id: string;
@@ -35,32 +33,31 @@ interface ChartDataItem {
 const BarChart = () => {
   const { lineChartData } = useAppSelector((state: RootState) => state.chart);
 
-
   const data = {
     labels: lineChartData.map((item: ChartDataItem) => item.month),
     datasets: [
       {
-        label: 'Sales for 2023 (in USD)',
+        label: "Sales for 2023 (in USD)",
         data: lineChartData.map((item: ChartDataItem) => item.sales),
-        backgroundColor: ' rgb(56 189 248)',
+        backgroundColor: " rgb(56 189 248)",
       },
       {
-        label: 'Purchase for 2023 (in USD)',
+        label: "Purchase for 2023 (in USD)",
         data: lineChartData.map((item: ChartDataItem) => item.purchase),
-        backgroundColor: 'rgb(99 102 241)',
-      }
+        backgroundColor: "rgb(99 102 241)",
+      },
     ],
   };
 
-  const options: ChartOptions<'bar'> = {
+  const options: ChartOptions<"bar"> = {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top',
+        position: "top",
       },
       title: {
         display: true,
-        text: 'Sales and Purchase Data for 2023',
+        text: "Sales and Purchase Data for 2023",
       },
     },
   };

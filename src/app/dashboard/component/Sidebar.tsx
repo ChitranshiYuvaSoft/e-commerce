@@ -1,22 +1,14 @@
 "use client";
 
-
 import { FaUsers } from "react-icons/fa";
 import { FaCoins } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 import { RootState } from "@/app/Redux/store";
 import { useAppSelector } from "@/app/Redux/hooks";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 const Sidebar = () => {
-
   const { user } = useAppSelector((state: RootState) => state.auth);
-
-
-  
-
 
   const logoutUser = () => {
     localStorage.clear();
@@ -52,15 +44,10 @@ const Sidebar = () => {
               Coins
             </li>
           </Link>
-          
-
-          
         </ul>
       </div>
       <div className="w-full h-[10%] shadow-inner flex items-center justify-between pl-5">
         <ul className="w-full h-[100%] flex items-start justify-around flex-col">
-          
-
           <button
             className="w-[95%]  py-3 px-3 text-slate-200 font-semibold text-sm bg-red-800 flex items-center justify-center"
             onClick={logoutUser}
