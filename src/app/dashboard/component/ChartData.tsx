@@ -10,7 +10,6 @@ import { useDispatch } from "react-redux";
 import { editChartValue, removeChartValue } from "@/app/Redux/chart/chartSlice";
 import toast from "react-hot-toast";
 import { useState } from "react";
-import Form from "@/app/components/Form";
 
 interface PropsFunction {
   togglePopup: () => void;
@@ -18,14 +17,11 @@ interface PropsFunction {
 }
 
 const ChartData = ({ togglePopup, isDataTogglePopup }: PropsFunction) => {
-
   const dispatch = useDispatch();
 
   const { lineChartData } = useAppSelector((state: RootState) => state.chart);
 
-// Delete Chart Data
   const deleteChartData = (index: number) => {
-    console.log(index);
     toast((t) => (
       <span className="w-[10rem] h-[8rem] bg-white flex itesm-center justify-around flex-col">
         <span className="w-full flex items-center justify-center my-2">
@@ -57,21 +53,14 @@ const ChartData = ({ togglePopup, isDataTogglePopup }: PropsFunction) => {
     ));
   };
 
-  // Edit Chart Data 
-  const handleEditData = (item:{}) => {
-    
-  }
-
   // State
   const name = "Update Data";
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
-  // const [toggleEditChartOpen, setToggleEditChartOpen] = useState<boolean>(false);
 
-  const handleToggleEditChartOpen = (item:{}) => {
+  const handleToggleEditChartOpen = (item: {}) => {
     setIsPopupOpen(!isPopupOpen);
-    console.log(item,"chart data edit");
     dispatch(editChartValue(item));
-  }
+  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 ">
@@ -143,7 +132,10 @@ const ChartData = ({ togglePopup, isDataTogglePopup }: PropsFunction) => {
                   </td>
                   <td className="px-6 py-4 text-center">{item.purchase}</td>
                   <td className="px-6 py-4 text-center">
-                    <button className="px-2 py-1 text-sm text-slate-300 bg-yellow-600 mx-3" onClick={() => handleToggleEditChartOpen(item)}>
+                    <button
+                      className="px-2 py-1 text-sm text-slate-300 bg-yellow-600 mx-3"
+                      onClick={() => handleToggleEditChartOpen(item)}
+                    >
                       <CiEdit className="text-sm font-semibold" />
                     </button>
                     <button
@@ -162,11 +154,11 @@ const ChartData = ({ togglePopup, isDataTogglePopup }: PropsFunction) => {
 
       {isPopupOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-         {/* <div  className="bg-white p-6 rounded-md w-[25rem] h-[25rem] shadow-lg">
+          {/* <div  className="bg-white p-6 rounded-md w-[25rem] h-[25rem] shadow-lg">
          <h2 className="text-xl font-semibold mb-4">Update Data</h2>
          
          </div> */}
-         {/* <Form /> */}
+          {/* <Form /> */}
         </div>
       )}
     </div>

@@ -36,8 +36,6 @@ const chartSlice = createSlice({
   initialState,
   reducers: {
     createChartValue: (state, action) => {
-      console.log(action.payload, "chart slice");
-
       const find = state.lineChartData.find(
         (item) => item.month === action.payload.month
       );
@@ -61,11 +59,10 @@ const chartSlice = createSlice({
       // };
     },
     removeChartValue: (state, action) => {
-      console.log(action.payload);
       const index = action.payload;
       const data = [...state.lineChartData];
       data.splice(index, 1);
-      console.log(data, "slice");
+
       return {
         ...state,
         lineChartData: data,

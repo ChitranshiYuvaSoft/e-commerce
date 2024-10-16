@@ -19,13 +19,10 @@ const page = () => {
 
   const { registerUser, verificationMessage, isSuccess, isError, message } =
     useAppSelector((state: RootState) => state.auth);
-  console.log(registerUser, "email");
   const { emailVerificationTOken, id } = registerUser;
   const handleEmailVerification = ({ emailVerificationTOken, id }: data) => {
     dispatch(emailVerification({ emailVerificationTOken, id }));
   };
-
-  console.log(verificationMessage, "emial")
 
   useEffect(() => {
     if (verificationMessage && isSuccess) {

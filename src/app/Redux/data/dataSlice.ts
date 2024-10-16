@@ -2,9 +2,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import client from "../apollo-client";
 import dataServices from "./dataService";
 
-interface SingleUser{
-    totalRecords : string;
-    data : any;
+interface SingleUser {
+  totalRecords: string;
+  data: any;
 }
 
 interface InitialState {
@@ -36,7 +36,6 @@ const dataSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(users.fulfilled, (state, action) => {
-        console.log(action.payload, "dataSlice From")
         state.isSuccess = true;
         state.isLoading = false;
         state.allUsers = action.payload;

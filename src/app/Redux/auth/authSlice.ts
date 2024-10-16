@@ -14,8 +14,8 @@ interface RegisterUser {
 }
 
 interface verifyData {
-  emailVerificationTOken : string;
-  id : string;
+  emailVerificationTOken: string;
+  id: string;
 }
 interface InitialState {
   user: any;
@@ -50,14 +50,12 @@ const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(login.fulfilled, (state, action) => {
-        console.log(action.payload, "auth token");
         state.isSuccess = true;
         state.isLoading = false;
         state.user = action.payload;
-        console.log(state.user, "user data");
-        localStorage.setItem("token",action.payload?.token)
+
+        localStorage.setItem("token", action.payload?.token);
         state.token = action.payload?.token;
-       
       })
       .addCase(login.rejected, (state, action: PayloadAction<any>) => {
         state.isSuccess = false;
@@ -72,7 +70,6 @@ const authSlice = createSlice({
         state.isSuccess = false;
       })
       .addCase(register.fulfilled, (state, action: PayloadAction<{}>) => {
-        console.log(action.payload ,"register Slice");
         state.isLoading = false;
         state.isSuccess = true;
         state.registerUser = action.payload;
@@ -90,21 +87,21 @@ const authSlice = createSlice({
         state.isError = false;
       })
       .addCase(emailVerification.fulfilled, (state, action) => {
-        console.log(action.payload, "verify LSice")
         state.isLoading = false;
         state.isSuccess = true;
         state.verificationMessage = action.payload;
         state.isError = false;
       })
-      .addCase(emailVerification.rejected, (state, action: PayloadAction<any>) => {
-        state.isLoading = false;
-        state.isSuccess = false;
-        state.isError = action.payload;
-      })
+      .addCase(
+        emailVerification.rejected,
+        (state, action: PayloadAction<any>) => {
+          state.isLoading = false;
+          state.isSuccess = false;
+          state.isError = action.payload;
+        }
+      );
   },
 });
-
-
 
 export const login = createAsyncThunk(
   "LOGIN/USER",
@@ -130,8 +127,8 @@ export const register = createAsyncThunk(
 
 export const emailVerification = createAsyncThunk(
   "EMAIL/VERIFICATION",
-  async (data : verifyData) => {
-      try {
+  async (data: verifyData) => {
+    try {
       return await authServices.verification(data);
     } catch (error) {
       console.log(error);

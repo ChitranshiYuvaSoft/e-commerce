@@ -3,7 +3,7 @@ import coinServices from "./coinService";
 
 interface InitialState {
   coins: string[];
-  coin : any;
+  coin: any;
   isSuccess: boolean;
   isLoading: boolean;
   isError: boolean;
@@ -11,7 +11,7 @@ interface InitialState {
 
 const initialState: InitialState = {
   coins: [],
-  coin : {},
+  coin: {},
   isSuccess: false,
   isLoading: false,
   isError: false,
@@ -29,7 +29,6 @@ const coinSlice = createSlice({
         state.isError = false;
       })
       .addCase(getCoinData.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.isSuccess = true;
         state.isLoading = false;
         state.coins = action.payload;
@@ -46,7 +45,6 @@ const coinSlice = createSlice({
         state.isError = false;
       })
       .addCase(getCoinDetails.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.isSuccess = true;
         state.isLoading = false;
         state.coin = action.payload;
@@ -67,12 +65,12 @@ export const getCoinData = createAsyncThunk("GET/COINS", async () => {
   }
 });
 
-export const getCoinDetails = createAsyncThunk("GET/COIN", async(id:any) => {
+export const getCoinDetails = createAsyncThunk("GET/COIN", async (id: any) => {
   try {
-    return await coinServices.getCoin(id)
+    return await coinServices.getCoin(id);
   } catch (error) {
     console.log(error);
   }
-})
+});
 
 export default coinSlice.reducer;

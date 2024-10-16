@@ -15,7 +15,7 @@ interface UserData {
 }
 
 const page = () => {
-  const { token, isError,  message, isLoading } = useAppSelector(
+  const { token, isError, message, isLoading } = useAppSelector(
     (state: RootState) => state.auth
   );
 
@@ -39,11 +39,9 @@ const page = () => {
 
   const handleLoginUser = (e: any) => {
     e.preventDefault();
-    console.log("userLogin");
     dispatch(login(userData));
     if (token) {
       router.refresh();
-     
     }
   };
 

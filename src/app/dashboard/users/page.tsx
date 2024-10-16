@@ -17,7 +17,6 @@ const page = () => {
   );
 
   const data = allUsers;
-  console.log(data, "from Users Page");
 
   useEffect(() => {
     dispatch(users({ page: "1", size: "10" }));

@@ -14,7 +14,6 @@ const page = () => {
     (state: RootState) => state.coin
   );
 
-  console.log(coin);
   useEffect(() => {
     dispatch(getCoinDetails(coinId));
   }, []);

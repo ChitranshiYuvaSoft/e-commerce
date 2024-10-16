@@ -22,8 +22,6 @@ const page = () => {
 
   const { user, isSuccess, isLoading, registerUser, message, isError } =
     useSelector((state: RootState) => state.auth);
-  console.log(registerUser, "register");
-  // emailVerificationTOken
 
   const [userData, setUserData] = useState<UserData>({
     name: "",
@@ -42,7 +40,6 @@ const page = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log("regitserUSer");
     dispatch(register(userData));
   };
 
@@ -55,7 +52,7 @@ const page = () => {
   }, [registerUser, isSuccess, isError, message]);
 
   const tokenGet = localStorage.getItem("token");
-  
+
   useEffect(() => {
     if (tokenGet) {
       router.push("/dashboard");
@@ -121,8 +118,6 @@ const page = () => {
                 <p></p>
               </>
             )}
-
-            
 
             <h6 className="text-center text-sm font-bold flex flex-col align-center justify-around">
               You have already account ,{" "}
