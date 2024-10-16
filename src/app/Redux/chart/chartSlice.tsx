@@ -45,8 +45,15 @@ const chartSlice = createSlice({
       if (find) {
         find.sales = action.payload.sales;
         find.purchase = action.payload.purchase;
+        // return {
+        //   ...state,
+        // };
       } else {
-        state.lineChartData.push(action.payload);
+        // state.lineChartData.push(action.payload);
+        return {
+          ...state,
+          lineChartData: [...state.lineChartData, action.payload],
+        };
       }
       // return {
       //   ...state,

@@ -8,8 +8,12 @@ import {
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  ChartOptions
 } from 'chart.js';
+import { useAppSelector } from '../Redux/hooks';
+import { RootState } from '../Redux/store';
+
 
 ChartJS.register(
   CategoryScale,
@@ -21,19 +25,34 @@ ChartJS.register(
 );
 
 
+interface ChartDataItem {
+  id: string;
+  sales: string;
+  purchase: string;
+  month: string;
+}
+
 const BarChart = () => {
+  const { lineChartData } = useAppSelector((state: RootState) => state.chart);
+
+
   const data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+    labels: lineChartData.map((item: ChartDataItem) => item.month),
     datasets: [
       {
         label: 'Sales for 2023 (in USD)',
-        data: [12000, 19000, 3000, 5000, 23000, 17000],
-        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+        data: lineChartData.map((item: ChartDataItem) => item.sales),
+        backgroundColor: ' rgb(56 189 248)',
+      },
+      {
+        label: 'Purchase for 2023 (in USD)',
+        data: lineChartData.map((item: ChartDataItem) => item.purchase),
+        backgroundColor: 'rgb(99 102 241)',
       }
     ],
   };
 
-  const options = {
+  const options: ChartOptions<'bar'> = {
     responsive: true,
     plugins: {
       legend: {
@@ -41,7 +60,7 @@ const BarChart = () => {
       },
       title: {
         display: true,
-        text: 'Monthly Sales',
+        text: 'Sales and Purchase Data for 2023',
       },
     },
   };

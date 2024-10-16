@@ -7,13 +7,20 @@ interface UserData {
   password: string;
 }
 
-// interface User {
-//   name: string;
-//   email: string;
-//   token: string;
-// }
+interface RegisterUser {
+  name: string;
+  email: string;
+  password: string;
+}
+
+interface verifyData {
+  emailVerificationTOken : string;
+  id : string;
+}
 interface InitialState {
   user: any;
+  registerUser: any;
+  verificationMessage: string;
   isSuccess: boolean;
   isLoading: boolean;
   isError: boolean;
@@ -23,6 +30,8 @@ interface InitialState {
 
 const initialState: InitialState = {
   user: {},
+  registerUser: {},
+  verificationMessage: "",
   isSuccess: false,
   isLoading: false,
   isError: false,
@@ -41,43 +50,93 @@ const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(login.fulfilled, (state, action) => {
-        console.log(action.payload, "auth token")
+        console.log(action.payload, "auth token");
         state.isSuccess = true;
         state.isLoading = false;
         state.user = action.payload;
         console.log(state.user, "user data");
-        state.token = action.payload.token;
-        localStorage.setItem("name", state.user.name);
-        localStorage.setItem("email", state.user.email);
-        localStorage.setItem("token", state.user.token);
+        localStorage.setItem("token",action.payload?.token)
+        state.token = action.payload?.token;
+       
       })
-      .addCase(login.rejected, (state, action: any) => {
+      .addCase(login.rejected, (state, action: PayloadAction<any>) => {
         state.isSuccess = false;
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload.message;
-      });
+      })
+
+      .addCase(register.pending, (state, action) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.isSuccess = false;
+      })
+      .addCase(register.fulfilled, (state, action: PayloadAction<{}>) => {
+        console.log(action.payload ,"register Slice");
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.registerUser = action.payload;
+      })
+      .addCase(register.rejected, (state, action: PayloadAction<any>) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.message = action.payload.message;
+      })
+
+      .addCase(emailVerification.pending, (state, action) => {
+        state.isLoading = true;
+        state.isSuccess = false;
+        state.isError = false;
+      })
+      .addCase(emailVerification.fulfilled, (state, action) => {
+        console.log(action.payload, "verify LSice")
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.verificationMessage = action.payload;
+        state.isError = false;
+      })
+      .addCase(emailVerification.rejected, (state, action: PayloadAction<any>) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = action.payload;
+      })
   },
 });
 
-// export const login = createAsyncThunk(
-//   "LOGIN/USER",
-//   async ({ email, password }: UserData) => {
-//     const response = await client.mutate({
-//       mutation: authServices.LOGIN_USER,
-//       mutation: authServices.LOGIN_USER,
-//       variables: { email, password },
-//     });
-//     return response.data.login;
-//   }
-// );
 
-export const login = createAsyncThunk("LOGIN/USER", async({ email, password }: UserData) => {
-  try {
-    return await authServices.loginUser({email, password});
-  } catch (error) {
-    console.log(error);
+
+export const login = createAsyncThunk(
+  "LOGIN/USER",
+  async ({ email, password }: UserData) => {
+    try {
+      return await authServices.loginUser({ email, password });
+    } catch (error) {
+      console.log(error);
+    }
   }
-})
+);
+
+export const register = createAsyncThunk(
+  "REGISTER/USER",
+  async ({ name, email, password }: RegisterUser) => {
+    try {
+      return await authServices.registerUser({ name, email, password });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const emailVerification = createAsyncThunk(
+  "EMAIL/VERIFICATION",
+  async (data : verifyData) => {
+      try {
+      return await authServices.verification(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 
 export default authSlice.reducer;

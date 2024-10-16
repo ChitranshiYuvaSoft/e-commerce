@@ -11,10 +11,10 @@ const layout = ({ children }: any) => {
 
         <div className="w-[78%] h-[98%] bg-slate-950 rounded-xl border border-slate-800 shadow-inner">
           <div className="w-full h-[10%] rounded-t-xl flex items-center justify-around">
-            <div className="w-[70%] h-[100%]">
+            <div className="w-[65%] h-[100%]">
 
             </div>
-            <div className="w-[30%] h-[100%] flex items-center justify-end pr-3">
+            <div className="w-[auto] h-[100%] flex items-center justify-end pr-3">
             <h2>
               <BreadCrumbs
                 homeElement={"Home"}

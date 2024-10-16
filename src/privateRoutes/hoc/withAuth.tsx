@@ -9,7 +9,7 @@ const withAuth = (WrappedComponent: React.ComponentType) => {
   return (props: any) => {
 
     // const {token} = useAppSelector(((state:RootState)=> state.auth ))
-    const publicRoutes = ["/login", "/register"];
+    const publicRoutes = ["/login", "/register", `/register/[emailVerification]`];
     const router = useRouter();
     const pathName = usePathname();
     const token = localStorage.getItem("token");
