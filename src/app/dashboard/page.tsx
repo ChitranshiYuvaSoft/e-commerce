@@ -7,6 +7,7 @@ import Form from "../components/Form";
 import { CopilotPopup } from "@copilotkit/react-ui";
 import { useAppSelector } from "../Redux/hooks";
 import { RootState } from "../Redux/store";
+import { useCopilotReadable } from "@copilotkit/react-core";
 
 interface Item {
   id: string;
@@ -24,6 +25,11 @@ const Page = () => {
   };
 
   const { lineChartData } = useAppSelector((state: RootState) => state.chart);
+
+  useCopilotReadable({
+    description: "The current user's colleagues",
+    value: lineChartData,
+  });
 
   return (
     <div className="w-full h-[100%] flex items-center justify-center flex-col">
